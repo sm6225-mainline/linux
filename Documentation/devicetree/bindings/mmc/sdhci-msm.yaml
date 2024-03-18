@@ -53,6 +53,7 @@ properties:
               - qcom,sdx65-sdhci
               - qcom,sm6115-sdhci
               - qcom,sm6125-sdhci
+              - qcom,sm6225-sdhci
               - qcom,sm6350-sdhci
               - qcom,sm6375-sdhci
               - qcom,sm8150-sdhci

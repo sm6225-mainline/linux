@@ -370,6 +370,195 @@
 			#hwlock-cells = <1>;
 		};
 
+		tlmm: pinctrl@500000 {
+			compatible = "qcom,sm6225-tlmm";
+			reg = <0x0 0x00500000 0x0 0x400000>,
+			      <0x0 0x00900000 0x0 0x400000>,
+			      <0x0 0x00d00000 0x0 0x400000>;
+			reg-names = "west", "south", "east";
+			interrupts = <GIC_SPI 227 IRQ_TYPE_LEVEL_HIGH>;
+			gpio-controller;
+			gpio-ranges = <&tlmm 0 0 114>; /* GPIOs + ufs_reset */
+			#gpio-cells = <2>;
+			interrupt-controller;
+			#interrupt-cells = <2>;
+
+			/* SDC pin type */
+			sdc1_on_state: sdc1-on-state {
+				clk-pins {
+					pins = "sdc1_clk";
+					bias-disable;		/* NO pull */
+					drive-strength = <16>;	/* 16 MA */
+				};
+
+				cmd-pins {
+					pins = "sdc1_cmd";
+					bias-pull-up;		/* pull up */
+					drive-strength = <10>;	/* 10 MA */
+				};
+
+				data-pins {
+					pins = "sdc1_data";
+					bias-pull-up;		/* pull up */
+					drive-strength = <10>;	/* 10 MA */
+				};
+
+				rclk-pins {
+					pins = "sdc1_rclk";
+					bias-pull-down; /* pull down */
+				};
+			};
+
+			sdc1_off_state: sdc1-off-state {
+				clk-pins {
+					pins = "sdc1_clk";
+					bias-disable;		/* NO pull */
+					drive-strength = <2>;	/* 2 MA */
+				};
+
+				cmd-pins {
+					pins = "sdc1_cmd";
+					bias-pull-up;		/* pull up */
+					drive-strength = <2>;	/* 2 MA */
+				};
+
+				data-pins {
+					pins = "sdc1_data";
+					bias-pull-up;		/* pull up */
+					drive-strength = <2>;	/* 2 MA */
+
+				rclk-pins {
+					pins = "sdc1_rclk";
+					bias-pull-down; /* pull down */
+				};
+			};
+
+			sdc2_on_state: sdc2-on-state {
+				clk-pins {
+					pins = "sdc2_clk";
+					bias-disable;		/* NO pull */
+					drive-strength = <16>;	/* 16 MA */
+				};
+
+				cmd-pins {
+					pins = "sdc2_cmd";
+					bias-pull-up;		/* pull up */
+					drive-strength = <10>;	/* 10 MA */
+				};
+
+				data-pins {
+					pins = "sdc2_data";
+					bias-pull-up;		/* pull up */
+					drive-strength = <10>;	/* 10 MA */
+				};
+
+			sdc2_off_state: sdc2-off-state {
+				clk-pins {
+					pins = "sdc2_clk";
+					bias-disable;		/* NO pull */
+					drive-strength = <2>;	/* 2 MA */
+				};
+
+				cmd-pins {
+					pins = "sdc2_cmd";
+					bias-pull-up;		/* pull up */
+					drive-strength = <2>;	/* 2 MA */
+				};
+
+				data-pins {
+					pins = "sdc2_data";
+					bias-pull-up;		/* pull up */
+					drive-strength = <2>;	/* 2 MA */
+				};
+
+			sdc2_cd_on: cd-on-state {
+					pins = "gpio88";
+					function = "gpio";
+					drive-strength = <2>;
+					bias-pull-up;
+				};
+
+			sdc2_cd_off: cd-off-state {
+					pins = "gpio88";
+					function = "gpio";
+					drive-strength = <2>;
+					bias-disable;
+				};
+
+			qup_uart2_default: qup-uart2-default-state {
+					pins = "gpio12", "gpio13";
+					function = "qup4";
+					drive-strength = <2>;
+					bias-disable;
+				};
+			};
+
+			qup_uart4_default: qup-uart4-default-state {
+					pins = "gpio8", "gpio9", "gpio11";
+					function = "gpio";
+					drive-strength = <2>;
+					bias-pull-down;
+				};
+
+			qup_i2c0_default: qup-i2c0-default-state {
+					pins = "gpio0", "gpio1";
+					function = "qup0";
+					drive-strength = <2>;
+					bias-disable;
+				};
+
+			qup_i2c1_default: qup-i2c1-default-state {
+					pins = "gpio4", "gpio5";
+					function = "qup1";
+					drive-strength = <2>;
+					bias-disable;
+				};
+
+			qup_i2c2_default: qup-i2c2-default-state {
+					pins = "gpio6", "gpio7";
+					function = "qup2";
+					drive-strength = <2>;
+					bias-disable;
+				};
+
+			qup_spi0_default: qup-spi0-default-state {
+					pins = "gpio0", "gpio1", "gpio2", "gpio3";
+					function = "qup0";
+					drive-strength = <6>;
+					bias-disable;
+				};
+
+			qup_spi1_default: qup-spi1-default-state {
+					pins = "gpio4", "gpio5", "gpio69", "gpio70";
+					function = "qup1";
+					drive-strength = <6>;
+					bias-disable;
+				};
+			};
+
+			qup_spi2_default: qup-spi2-default-state {
+					pins = "gpio4", "gpio5", "gpio69", "gpio70";
+					function = "gpio";
+					drive-strength = <6>;
+					bias-disable;
+				};
+
+			qup_spi3_default: qup-spi3-default-state {
+					pins = "gpio14", "gpio15", "gpio16", "gpio17";
+					function = "qup5";
+					drive-strength = <6>;
+					bias-disable;
+				};
+			};
+
+			qup_spi4_default: qup-spi4-default-state {
+					pins = "gpio14", "gpio15", "gpio16", "gpio17";
+					function = "gpio";
+					drive-strength = <6>;
+					bias-disable;
+				};
+		};
+
 		gcc: clock-controller@1400000 {
 			compatible = "qcom,gcc-sm6225";
 			reg = <0x0 0x01400000 0x0 0x1f0000>;
@@ -403,15 +592,6 @@
 			reg = <0x0 0x04804000 0x0 0x3000>, <0x0 0x04810000 0x0 0x8000>;
 			reg-names = "std", "ice";
 			interrupts = <GIC_SPI 356 IRQ_TYPE_LEVEL_HIGH>;
-			phys = <&ufs_mem_phy>;
-			phy-names = "ufsphy";
-			lanes-per-direction = <1>;
-			#reset-cells = <1>;
-			resets = <&gcc GCC_UFS_PHY_BCR>;
-			reset-names = "rst";
-
-			power-domains = <&gcc GCC_UFS_PHY_GDSC>;
-			iommus = <&apps_smmu 0x100 0>;
 
 			clocks = <&gcc GCC_UFS_PHY_AXI_CLK>,
 				 <&gcc GCC_SYS_NOC_UFS_PHY_AXI_CLK>,
@@ -429,7 +609,7 @@
 				      "tx_lane0_sync_clk",
 				      "rx_lane0_sync_clk",
 				      "rx_lane1_sync_clk";
-			freq-table-hz = <50000000 200000000>,
+			freq-table-hz = <50000000 240000000>,
 					<0 0>,
 					<0 0>,
 					<37500000 150000000>,
@@ -437,6 +617,17 @@
 					<0 0>,
 					<0 0>,
 					<0 0>;
+
+			resets = <&gcc GCC_UFS_PHY_BCR>;
+			reset-names = "rst";
+			#reset-cells = <1>;
+
+			phys = <&ufs_mem_phy>;
+			phy-names = "ufsphy";
+
+			lanes-per-direction = <2>;
+
+			iommus = <&apps_smmu 0x200 0x0>;
 
 			status = "disabled";
 		};
@@ -450,7 +641,7 @@
 
 		ufs_mem_phy: phy@4807000 {
 			compatible = "qcom,sm6225-qmp-ufs-phy";
-			reg = <0x0 0x04807000 0x0 0x1000>;
+			reg = <0x0 0x04807000 0x0 0xe00>;
 
 			clocks = <&rpmcc RPM_SMD_XO_CLK_SRC>,
 				 <&gcc GCC_UFS_PHY_PHY_AUX_CLK>,
@@ -461,6 +652,8 @@
 
 			resets = <&ufs_mem_hc 0>;
 			reset-names = "ufsphy";
+
+			power-domains = <&gcc GCC_UFS_PHY_GDSC>;
 
 			#phy-cells = <0>;
 

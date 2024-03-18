@@ -39,30 +39,14 @@
 	};
 
 	reserved-memory {
-		debug_mem: debug@ffb00000 {
-			reg = <0x0 0xffb00000 0x0 0xc0000>;
-			no-map;
-		};
-
-		last_log_mem: lastlog@ffbc0000 {
-			reg = <0x0 0xffbc0000 0x0 0x80000>;
-			no-map;
-		};
-
-		pstore_mem: ramoops@ffc00000 {
+		pstore_mem: ramoops@5d000000 {
 			compatible = "ramoops";
-			reg = <0x0 0xffc40000 0x0 0xc0000>;
-			record-size = <0x1000>;
-			console-size = <0x40000>;
-			pmsg-size = <0x20000>;
-		};
-
-		cmdline_mem: memory@ffd00000 {
-			reg = <0x0 0xffd40000 0x0 0x1000>;
-			no-map;
+			reg = <0x00 0x5d000000 0x00 0x400000>;
+			record-size = <0x80000>;
+			pmsg-size = <0x200000>;
+			console-size = <0x100000>;
 		};
 	};
-
 };
 
 &rpm_requests {
@@ -214,7 +198,9 @@
 	};
 };
 
-
+&tlmm {
+	gpio-reserved-ranges = <0 4>;
+};
 
 &ufs_mem_hc {
 	vcc-supply = <&pm6125_l24>;
