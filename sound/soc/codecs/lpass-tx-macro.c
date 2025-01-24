@@ -2505,6 +2505,9 @@ static const struct of_device_id tx_macro_dt_match[] = {
 		.compatible = "qcom,sm6115-lpass-tx-macro",
 		.data = &lpass_ver_10_sm6115,
 	}, {
+		.compatible = "qcom,sm6225-lpass-tx-macro",
+		.data = &lpass_ver_10_sm6115,
+	}, {
 		.compatible = "qcom,sm8250-lpass-tx-macro",
 		.data = &lpass_ver_9,
 	}, {

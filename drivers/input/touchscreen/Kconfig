@@ -1390,4 +1390,22 @@ config TOUCHSCREEN_HIMAX_HX83112B
 	  To compile this driver as a module, choose M here: the
 	  module will be called himax_hx83112b.
 
+source "drivers/input/touchscreen/focaltech_touch/Kconfig"
+
+config TOUCHSCREEN_COMMON
+    bool "touchscreen for xiaomi project"
+	 depends on I2C
+	 default n
+	 help
+	Say Y here if you have a xiaomi touchscreen and want to enable support for the built-in touchscreen.
+
+config TP_COMMON
+	bool "Common touchscreen interface to interact with userspace"
+	default n
+	help
+	  Say Y here if you want to control touchpanel features via
+	  /sys/touchpanel.
+
+	  If unsure, say N.
+
 endif

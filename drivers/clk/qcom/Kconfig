@@ -962,6 +962,16 @@ config SM_DISPCC_6125
 	  Say Y if you want to support display devices and functionality such as
 	  splash screen
 
+config SM_DISPCC_6225
+	tristate "SM6225 Display Clock Controller"
+	depends on ARM64 || COMPILE_TEST
+	depends on SM_GCC_6225
+	help
+	  Support for the display clock controller on Qualcomm Technologies, Inc
+	  SM6225 devices.
+	  Say Y if you want to support display devices and functionality such as
+	  splash screen
+
 config SM_DISPCC_7150
 	tristate "SM7150 Display Clock Controller"
 	depends on ARM64 || COMPILE_TEST
@@ -1046,6 +1056,15 @@ config SM_GCC_6125
 	select QCOM_GDSC
 	help
 	  Support for the global clock controller on SM6125 devices.
+	  Say Y if you want to use peripheral devices such as UART,
+	  SPI, I2C, USB, SD/UFS, PCIe etc.
+
+config SM_GCC_6225
+	tristate "SM6225 Global Clock Controller"
+	depends on ARM64 || COMPILE_TEST
+	select QCOM_GDSC
+	help
+	  Support for the global clock controller on SM6225 devices.
 	  Say Y if you want to use peripheral devices such as UART,
 	  SPI, I2C, USB, SD/UFS, PCIe etc.
 
@@ -1157,6 +1176,15 @@ config SM_GPUCC_6125
 	  Say Y if you want to support graphics controller devices and
 	  functionality such as 3D graphics.
 
+config SM_GPUCC_6225
+	tristate "SM6225 Graphics Clock Controller"
+	select SM_GCC_6225
+	depends on ARM64 || COMPILE_TEST
+	help
+	  Support for the graphics clock controller on SM6225 devices.
+	  Say Y if you want to support graphics controller devices and
+	  functionality such as 3D graphics.
+
 config SM_GPUCC_6375
 	tristate "SM6375 Graphics Clock Controller"
 	select SM_GCC_6375
@@ -1229,6 +1257,24 @@ config SM_GPUCC_8650
 	  Support for the graphics clock controller on SM8650 devices.
 	  Say Y if you want to support graphics controller devices and
 	  functionality such as 3D graphics.
+
+config SM_LPASSCC_6115
+	tristate "SM6115 Low Power Audio Subsystem (LPASS) Clock Controller"
+	depends on ARM64 || COMPILE_TEST
+	select SM_GCC_6115
+	help
+	  Support for the LPASS clock controller on SM6115 devices.
+	  Say Y if you want to toggle LPASS-adjacent resets within
+	  this clock controller to reset the LPASS subsystem.
+
+config SM_LPASSCC_6225
+	tristate "SM6225 Low Power Audio Subsystem (LPASS) Clock Controller"
+	depends on ARM64 || COMPILE_TEST
+	select SM_GCC_6225
+	help
+	  Support for the LPASS clock controller on SM6225 devices.
+	  Say Y if you want to toggle LPASS-adjacent resets within
+	  this clock controller to reset the LPASS subsystem.
 
 config SM_TCSRCC_8550
 	tristate "SM8550 TCSR Clock Controller"
