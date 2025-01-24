@@ -6,7 +6,7 @@
 #include <dt-bindings/clock/qcom,gcc-sm6225.h>
 #include <dt-bindings/clock/qcom,sm6225-dispcc.h>
 #include <dt-bindings/clock/qcom,sm6225-gpucc.h>
-#include <dt-bindings/clock/qcom,sm6225-lpasscc.h
+#include <dt-bindings/clock/qcom,sm6225-lpasscc.h>
 #include <dt-bindings/clock/qcom,rpmcc.h>
 #include <dt-bindings/dma/qcom-gpi.h>
 #include <dt-bindings/firmware/qcom,scm.h>
@@ -1535,18 +1535,6 @@
 					};
 				};
 			};
-		};
-
-
-		lpasscc: lpasscc@3000000 {
-			compatible = "qcom,sm6225-lpasscc";
-			reg = <0 0x03000000 0 0x40>,
-			      <0 0x03c04000 0 0x4>;
-			reg-names = "qdsp6ss", "top_cc";
-			clocks = <&gcc GCC_CFG_NOC_LPASS_CLK>;
-			clock-names = "iface";
-			#clock-cells = <1>;
-			status = "reserved"; /* Owned by ADSP firmware */
 		};
 
 		vamacro: codec@a730000 {
